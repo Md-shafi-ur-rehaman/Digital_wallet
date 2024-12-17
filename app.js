@@ -3,10 +3,10 @@ const express = require("express");
 // const dotenv = require("dotenv");
 // const mongoose = require("mongoose");
 // const helmet = require('helmet');
-const connectDB = require('./config/database');
-const userRoute = require('./routes/user');
-const transactionRoute = require('./routes/transaction');
-const cookieParser = require('cookie-parser');
+// const connectDB = require('./config/database');
+// const userRoute = require('./routes/user');
+// const transactionRoute = require('./routes/transaction');
+// const cookieParser = require('cookie-parser');
 
 const app = express()
 const PORT = 8000
