@@ -6,7 +6,7 @@ const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
 const userVerification = require("../middlewares/userVerification");
 
-const router = express.Router();
+const userRouter = express.Router();
 
 const signupBody = zod.object({
     email: zod.string().email(),
@@ -16,7 +16,7 @@ const signupBody = zod.object({
     pin: zod.number()
 });
 
-router.get("/", async (req, res)=>{
+userRouter.get("/", async (req, res)=>{
   try {
     // Retrieve token from cookies
     const token = req.cookies.token;
@@ -56,7 +56,7 @@ router.get("/", async (req, res)=>{
   }
 })
 
-router.post("/search", async(req, res)=>{
+userRouter.post("/search", async(req, res)=>{
   const phoneNumber = req.body.phoneNumber;
   const user = await User.findOne({phoneNumber});
 
@@ -74,7 +74,7 @@ router.post("/search", async(req, res)=>{
   })
 })
 
-router.post("/register", async (req, res) => {
+userRouter.post("/register", async (req, res) => {
     // const { success } = signupBody.safeParse(req.body);
     // if (!success) {
     //   return res.status(411).json({
@@ -124,7 +124,7 @@ const signinBody = zod.object({
     password: zod.string(),
 });
 
-router.post('/login', async (req, res)=>{
+userRouter.post('/login', async (req, res)=>{
     // const { success } = signinBody.safeParse(req.body);
     // if (!success) {
     //   return res.status(411).json({
@@ -161,7 +161,7 @@ router.post('/login', async (req, res)=>{
 })
 
 // Route to get user profile
-router.get('/user/profile', userVerification, (req, res) => {
+userRouter.get('/user/profile', userVerification, (req, res) => {
   // req.user is available from the verification middleware
   res.status(200).json({
     success: true,
@@ -175,7 +175,7 @@ router.get('/user/profile', userVerification, (req, res) => {
   });
 });
 
-router.get('/user', userVerification, (req, res) => {
+userRouter.get('/user', userVerification, (req, res) => {
   // req.user is available from the verification middleware
   res.json({
     success: true,
@@ -190,7 +190,7 @@ router.get('/user', userVerification, (req, res) => {
 });
 
 // Logout router
-router.post('/logout', (req, res) => {
+userRouter.post('/logout', (req, res) => {
   // Clear the token cookie
   res.clearCookie('token', {
     httpOnly: true,
@@ -204,4 +204,4 @@ router.post('/logout', (req, res) => {
   });
 });
 
-module.exports = router;
+module.exports = userRouter;
