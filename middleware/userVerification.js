@@ -4,7 +4,7 @@ const User = require("../models/user");
 const app = express();
 
 // Middleware for token verification and user retrieval
-const verifyUserToken = async (req, res, next) => {
+const userVerification = async (req, res, next) => {
   try {
     // Retrieve token from cookies
     const token = req.cookies.token;
@@ -59,5 +59,5 @@ const verifyUserToken = async (req, res, next) => {
   }
 };
 
-module.exports = verifyUserToken;
+module.exports = userVerification;
 
