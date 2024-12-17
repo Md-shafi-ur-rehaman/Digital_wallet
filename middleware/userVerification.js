@@ -1,7 +1,5 @@
-const express = require('express');
 const jwt = require('jsonwebtoken');
 const User = require("../models/user");
-const app = express();
 
 // Middleware for token verification and user retrieval
 const userVerification = async (req, res, next) => {

@@ -4,7 +4,7 @@ const User = require("../models/user");
 const Wallet = require("../models/wallet");
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
-const userVerification = require("../middlewares/userVerification");
+// const userVerification = require("../middleware/userVerification");
 
 const userRouter = express.Router();
 
