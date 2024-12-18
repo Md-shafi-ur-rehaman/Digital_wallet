@@ -3,11 +3,11 @@ const zod = require("zod");
 const User = require("../models/user");
 const Wallet = require("../models/wallet");
 const Transaction = require('../models/transaction');
-const router = express.Router();
-const userVerification = require("../middlewares/userVerification");
+const TransacRouter = express.Router();
+const userVerification = require("../middleware/userVerification");
 const mongoose = require('mongoose')
 
-router.get('/balance', userVerification, async (req, res)=>{
+TransacRouter.get('/balance', userVerification, async (req, res)=>{
     // const token = req.cookies.token;
     try{ 
         const user_id = req.user._id;
@@ -26,7 +26,7 @@ router.get('/balance', userVerification, async (req, res)=>{
     
 })
 
-router.post('/send', userVerification, async (req, res)=>{
+TransacRouter.post('/send', userVerification, async (req, res)=>{
     const {email, phoneNumber, amount, pin} = req.body;
     
     // const session = mongoose.startSession();
@@ -120,7 +120,7 @@ router.post('/send', userVerification, async (req, res)=>{
     }
 })
 
-router.get('/transaction', userVerification, async (req, res)=>{
+TransacRouter.get('/transaction', userVerification, async (req, res)=>{
     const user_id = req.user._id;
     const phoneNumber= req.user.phoneNumber;
     const transactionArray = await Transaction.find({$or:[{senderPhoneNumber:phoneNumber},{ recieverPhoneNumber:phoneNumber}]});
@@ -130,4 +130,4 @@ router.get('/transaction', userVerification, async (req, res)=>{
     
 })
 
-module.exports = router;
+module.exports = TransacRouter;

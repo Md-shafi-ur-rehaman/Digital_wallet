@@ -5,7 +5,7 @@ const mongoose = require("mongoose");
 const helmet = require('helmet');
 const connectDB = require('./config/database');
 const userRouter = require('./routes/user');
-const transactionRoute = require('./routes/transaction');
+const TransacRouter = require('./routes/transaction');
 const cookieParser = require('cookie-parser');
 
 const app = express()
@@ -17,7 +17,7 @@ app.use(cookieParser());
 dotenv.config();
 
 app.use('/api/v1/',userRouter);
-app.use('/api/v1/',transactionRoute);
+app.use('/api/v1/',TransacRouter);
 
 
 
