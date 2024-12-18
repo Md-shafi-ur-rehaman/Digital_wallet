@@ -5,20 +5,24 @@ const mongoose = require("mongoose");
 const helmet = require('helmet');
 const connectDB = require('./config/database');
 const userRouter = require('./routes/user');
-// const transactionRoute = require('./routes/transaction');
+const transactionRoute = require('./routes/transaction');
 const cookieParser = require('cookie-parser');
 
 const app = express()
-const PORT = 8000
 
-app.get('/', (req, res) => {
-  res.send('Hello World')
-})
+app.use(cors());
+app.use(helmet());
+app.use(express.json());
+app.use(cookieParser());
+dotenv.config();
 
-app.get('/about', (req, res) => {
-  res.send('About route 🎉 ')
-})
+app.use('/api/v1/',userRouter);
+app.use('/api/v1/',transactionRoute);
 
-app.listen(PORT, () => {
-  console.log(`✅ Server is running on port ${PORT}`);
-})
+
+
+app.listen(3000,()=>{
+  connectDB();
+  console.log("listening on localhost:3000");
+});
+
